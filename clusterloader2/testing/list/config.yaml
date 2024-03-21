@@ -117,24 +117,6 @@ steps:
       cpu: {{$clusterScopedPodCpu}}m
       memory: {{$clusterScopedPodMemory}}Mi
       namespaced: false
-- name: Wait 5 minutes
-  measurements:
-    - Identifier: Wait
-      Method: Sleep
-      Params:
-        duration: 5m
-- module:
-    path: modules/list-benchmark.yaml
-    params:
-      namePrefix: "list-namespaced-configmaps-"
-      namespaced: true
-      namespaceNumber: {{$namespaceNumber}}
-      replicas: 0
-- module:
-    path: modules/list-benchmark.yaml
-    params:
-      namePrefix: "list-cluster-scoped-configmaps-"
-      replicas: 0
 
 - module:
     path: modules/list-benchmark.yaml
@@ -157,25 +139,7 @@ steps:
       cpu: {{$clusterScopedPodCpu}}m
       memory: {{$clusterScopedPodMemory}}Mi
       namespaced: false
-- name: Wait 5 minutes
-  measurements:
-    - Identifier: Wait
-      Method: Sleep
-      Params:
-        duration: 5m
-- module:
-    path: modules/list-benchmark.yaml
-    params:
-      namePrefix: "list-namespaced-secrets-"
-      namespaced: true
-      namespaceNumber: {{$namespaceNumber}}
-      replicas: 0
-- module:
-    path: modules/list-benchmark.yaml
-    params:
-      namePrefix: "list-cluster-scoped-secrets-"
-      replicas: 0
-
+      
 - name: deleting namespace for list benchmark pods
   phases:
   - replicasPerNamespace: 0
